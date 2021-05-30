@@ -11,14 +11,14 @@ export const UserList: React.FC<Props> = ({ userList, setActive, activeUsers }) 
 
   return (
     <div className="user-list">
-      <h3>{key}</h3>
+      <h2>{key}</h2>
       <ul>
         {userList[key].length ? (
           userList[key].map((user: IUser) => (
             <li key={user.id}>
-              <h5>
+              <h3 className={activeUsers.find((item) => item.id === user.id) ? 'text-blue' : 'text-black'}>
                 {user.firstName} {user.lastName}
-              </h5>
+              </h3>
               <p>
                 <input
                   type="radio"

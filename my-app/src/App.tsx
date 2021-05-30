@@ -27,7 +27,7 @@ const App: React.FC = () => {
   return (
     <div className="app">
       {!!users.length && <Employees users={users} setActive={handleSetActive} activeUsers={activeUsers} />}
-      {!!activeUsers.length && <ActiveUsers activeUsers={activeUsers} />}
+      <ActiveUsers activeUsers={activeUsers} />
     </div>
   )
 }

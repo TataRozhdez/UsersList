@@ -21,6 +21,14 @@ p {
   margin: 0 0 0.5rem;
 }
 
+.text-blue {
+  color: blue;
+}
+
+.text-black {
+  color: black;
+}
+
 .users {
   display: flex;
   justify-content: center;

@@ -19,9 +19,20 @@ type objList = {
   [typeName: string]: IUser[]
 }
 
+type List = {
+  [typeName: string]: any
+}
+
+type newMonth = {
+  [x: string]: IUser[]
+}
+
 type DispatchType = (args: UserAction) => UserAction
 
 type FilterUser = (users: IUser[]) => void
 
 type SortAlphabet = (character: string, users: any, array: any) => void
+
+type SortMonth = (users: IUser[]) => void
+
 type Sort = (users: any, array: any) => void
