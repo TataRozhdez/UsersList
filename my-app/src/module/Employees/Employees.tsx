@@ -1,42 +1,47 @@
 import * as React from 'react'
-import { UserList } from '../UserList/UserList';
+import { UserList } from './components/UserList/UserList'
 
 const characterA = 65
 const characterZ = 90
 
-const sortingUser: any[] = []
+const alphabetUsers: SortAlphabet = (character, users, array) => {
+  const listUsers: FilterUser = users.filter(
+    (user: { lastName: string[] }) => user?.lastName[0].toUpperCase() === character,
+  )
 
-const alphabetUsers: SortAlphabet = (character, users) => {
-
-  const listUsers: FilterUser = users.filter((user: { lastName: string[]; }): any => user?.lastName[0].toUpperCase() === character)
-  
   const sortList: any = {}
   sortList[character] = listUsers
 
-  return sortingUser.push(sortList)
+  return array.push(sortList)
+}
+
+const sort: Sort = (users, array) => {
+  for (let i = characterA; i <= characterZ; i++) {
+    alphabetUsers(String.fromCharCode(i), users, array)
+  }
+  return array
 }
 
 type Props = {
   users: IUser[]
-  // changeStatus?: (user: IUser) => void
+  activeUsers: IUser[]
+  setActive: (user: IUser, users: IUser[]) => UserAction
 }
 
-export const Employees: React.FC<Props> = ({ users }) => {
+export const Employees: React.FC<Props> = ({ users, setActive, activeUsers }) => {
+  const sortingUser: any[] = []
 
-  for (let i = characterA; i <= characterZ; i++) {
-    alphabetUsers(String.fromCharCode(i), users);
-  }  
+  sort(users, sortingUser)
 
   return (
-  <div>
-    <ul>
+    <div className="w-50">
       <h1>Employees</h1>
-        {
-          sortingUser.length > 0
-          && sortingUser.map((userList: objList, index: number) => <UserList key={index} userList={userList} />)
-        }
-    </ul>
-  </div>      
+      <div className="users">
+        {!!sortingUser.length &&
+          sortingUser.map((userList: objList, index) => (
+            <UserList key={index} userList={userList} activeUsers={activeUsers} setActive={setActive} />
+          ))}
+      </div>
+    </div>
   )
 }
-

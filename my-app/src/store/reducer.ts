@@ -1,13 +1,11 @@
-import * as actionTypes from "./actionTypes"
+import * as actionTypes from './actionTypes'
 
 const initialState: UserState = {
   users: [],
+  activeUsers: [],
 }
 
-const reducer = (
-  state: UserState = initialState,
-  action: UserAction
-): UserState => {
+const reducer = (state: UserState = initialState, action: UserAction): UserState => {
   switch (action.type) {
     case actionTypes.GET_USERS: {
       return {
@@ -15,17 +13,13 @@ const reducer = (
         users: action.users,
       }
     }
-      
-    // case actionTypes.REMOVE_USER: {
-    //   const updatedUsers: IUser[] = state.users.filter(
-    //     user => user.id !== action.user.id
-    //   )
-    //   return {
-    //     ...state,
-    //     users: updatedUsers,
-    //   }
-    // }
-      
+
+    case actionTypes.ADD_USER: {
+      return {
+        ...state,
+        activeUsers: action.users,
+      }
+    }
   }
   return state
 }
